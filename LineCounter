@@ -1,1 +1,25 @@
-test
+Imports System.IO.File
+Public Class Form1
+    Dim FilePath As String
+    Dim Lines() As String
+
+    Private Sub WinEightCloseButton1_Click(sender As Object, e As EventArgs) Handles WinEightCloseButton1.Click
+        Close()
+    End Sub
+    Sub OpenFile()
+        Using File As New OpenFileDialog With {.Filter = "Text(.txt)|*.txt"}
+            If File.ShowDialog() = DialogResult.OK Then
+                FilePath = File.FileName
+                TextBox1.Text = File.FileName
+                Lines = IO.File.ReadAllLines(FilePath)
+            End If
+        End Using
+    End Sub
+
+    Private Sub WinEightButton2_Click(sender As Object, e As EventArgs) Handles WinEightButton2.Click
+        OpenFile()
+    End Sub
+    Private Sub WinEightButton1_Click(sender As Object, e As EventArgs) Handles WinEightButton1.Click
+        MsgBox("The file has: " & Lines.Length & " lines")
+    End Sub
+End Class
